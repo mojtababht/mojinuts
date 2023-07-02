@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for product in products %}
+        {{ product.name }}
+    {% endfor %}
+
+    {% for category in categorys %}
+        {{ category.title }}
+    {% endfor %}
+
+    {% for city in citys %}
+        {{ city.name }}
+    {% endfor %}
+
+
+
+{% endblock content %}

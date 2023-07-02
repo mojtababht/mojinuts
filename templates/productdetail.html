@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="row h-100" >
+            <div class="col h-25" > <img src="{{ product.avatar.url }}" class="rounded" style="height: 100%"></div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col"><h1>{{ product.name }}</h1></div>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col">
+                            <p class="h4">{{ product.Type }}</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col"><p class="h5"><a href="{% url 'categorydetail' product.category.id %}" class="link-dark link-opacity-50-hover " style="text-decoration: none">#{{ product.category }}</a></p></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <p class="h4">هر گرم  {{ product.price|intcomma }}  تومان</p>
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="row">
+                        <div class="col">
+                            {% if user.is_authenticated %}
+                                <form method="post" action="{% url 'addtocart' %}">
+                                    {% csrf_token %}
+                                    <div class="btn-group btn-group-sm">
+                                        <input type="hidden" name="product" value="{{ product.id }}">
+                                        <input type="number" class="form-control form-control-sm" name="quantity" placeholder="مقدار(گرم)" style="width: 10rem">
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus" ></i></button>
+                                    </div>
+                                </form>
+
+                            {% else %}
+                                <p><a href="{% url 'login' %}">Login</a> برای خرید وارد شوید</p>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+        </div>
+    </div>
+
+{% endblock content %}

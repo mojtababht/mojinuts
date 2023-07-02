@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid mt4 align-items-center">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+
+                        <img class="img-fluid rounded-circle" src="{{ customuser.avatar.url }}">
+
+                    </div>
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <h2>{{ customuser.first_name }} {{ customuser.last_name }}</h2>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col">
+                        <h2>شماره موبایل: {{ customuser.phone_no }}</h2>
+                    </div>
+                </div>
+
+                <a href="{% url 'profileupdate' customuser.id %}" class="btn btn-primary mt-2">ویرایش اطلاعات</a>
+            </div>
+            {% if user.is_superuser %}
+                <div class="col">
+                    <div class="container-fluid">
+                        <a class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover mt-5"
+                           href="{% url 'productcreate' %}"><i class="fa fa-add"></i>افزودن محصول</a><br>
+                        <a class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover mt-5"
+                           href="{% url 'categorycreate' %}"><i class="fa fa-add"></i>افزودن کتگوری</a><br>
+                        <a class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover mt-5"
+                           href="{% url 'inventory' %}"><i class="fa fa-add"></i>انبار ها</a><br>
+                        <a class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover mt-5"
+                           href="{% url 'inventoryproduct' %}"><i class="fa fa-add"></i>موجودی انبار</a><br>
+                        <a class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover mt-5"
+                           href="{% url 'orders' %}"><i class="fa fa-add"></i>سفارشات</a>
+
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+{% endblock %}

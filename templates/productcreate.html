@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post" id="newproduct">
+        {% csrf_token %}
+        <div class="container-fluid w-50">
+            <div class="row">
+                <div class="col">
+                    <label>نام محصول:</label>
+                </div>
+                <div class="col">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>کتگوری</label>
+                </div>
+                <div class="col">
+                    {{ form.category }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>قیمت:</label>
+                </div>
+                <div class="col">
+                    {{ form.price }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>نوع:</label>
+                </div>
+                <div class="col">
+                    {{ form.Type }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>انبار:</label>
+                </div>
+                <div class="col">
+                    {{ form.inventory }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>عکس محصول:</label>
+                </div>
+                <div class="col">
+                    {{ form.avatar }}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>تامین کننده:</label>
+                </div>
+                <div class="col">
+                    {{ form.supplier }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">ذخیره</button>
+
+
+
+        </div>
+
+    </form>
+
+
+
+{% endblock content %}

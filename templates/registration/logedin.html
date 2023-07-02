@@ -1,0 +1,9 @@
+<script>
+    window.onload = function () {
+        var previousUrl = localStorage.getItem('previousUrl');
+        if (previousUrl) {
+            localStorage.removeItem('previousUrl');
+            window.location.href = previousUrl;
+        }
+    };
+</script>

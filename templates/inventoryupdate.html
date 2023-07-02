@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <form method="post">
+            {% csrf_token %}
+            <label>شهر: </label>{{ form.city }}
+            <button class="btn btn-sm btn-success mt-2">ذخیره</button>
+            <a href="{% url 'inventory' %}" class="btn btn-sm btn-secondary mt-2 ">لغو</a>
+        </form>
+    </div>
+{% endblock %}

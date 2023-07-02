@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">{{ order.user.first_name }} {{ order.user.last_name }}</div>
+            <div class="col">{{ order.user.phone_no }} {{ order.city }}</div>
+        </div>
+        {% for orderitem in order.orderitem_set.all %}
+
+            <div class="row">
+                <div class="col">{{ orderitem.product.name }} {{ orderitem.quantity }} گرم</div>
+            </div>
+        {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        ارسال شده
+        {{ form.is_send }}<br>
+        <button type="submit" class="btn btn-success">ثبت</button>
+    </form>
+
+    </div>
+{% endblock %}

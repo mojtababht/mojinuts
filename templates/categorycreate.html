@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_superuser %}
+
+
+        <form method="post" class="form-control w-25" >
+            {% csrf_token %}
+            <label>نام کتگوری:</label>
+            {{ form.title }}<br>
+            <button type="submit" class="btn btn-success mt-2">ذخیره</button>
+        </form>
+    {% else %}
+        <p>just admin can see this page</p>
+
+
+    {% endif %}
+
+{% endblock %}

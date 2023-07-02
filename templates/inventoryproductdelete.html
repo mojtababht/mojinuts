@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <form method="post">
+            {% csrf_token %}
+            <h2>از درخواست خود اطمینان دارید؟</h2>
+            <button type="submit" class="btn btn-danger">حذف</button>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h3 class="display-5 mb-2 text-center">سبد خرید</h3>
+                    <p class="mb-5 text-center">محصولات موجود در سبد خرید <i
+                            class="text-info font-weight-bold">{{ cart.cartitem_set.all.count }}</i></p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <table id="shoppingCart" class="table table-condensed table-responsive">
+                        <thead>
+                        <tr>
+                            <th style="width:60%">محصول</th>
+                            <th style="width:12%">قیمت هر گرم(تومان)</th>
+                            <th style="width:10%">مقدار(گرم)</th>
+                            <th style="width:16%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cartitem in cart.cartitem_set.all %}
+
+
+
+                            <tr>
+                                <td data-th="Product">
+                                    <div class="row">
+                                        <div class="col-md-3 text-left">
+                                            <img src="{{ cartitem.product.avatar.url }}" alt=""
+                                                 class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                        </div>
+                                        <div class="col-md-9 text-left mt-sm-2">
+                                            <h4>{{ cartitem.product.name }}</h4>
+                                            <p class="font-weight-light">({{ cartitem.product.Type }})</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Price">{{ cartitem.product.price |intcomma }}</td>
+                                <form method="post" action="{% url 'updatcart' cartitem.id %}">
+                                    {% csrf_token %}
+                                    <td data-th="Quantity">
+                                        <input type="number" name="quantity"
+                                               class="form-control form-control-lg text-center"
+                                               value="{{ cartitem.quantity }}">
+                                    </td>
+                                    <td class="actions" data-th="">
+                                        <div class="text-right">
+                                            <button type="submit"
+                                                    class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-sync"></i>
+                                            </button>
+                                </form>
+                                <form method="post" action="{% url 'deletefromcart' cartitem.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                </form>
+                                <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+                </table>
+                <div class="float-right text-right">
+                    <h4>جمع کل:</h4>
+                    <h1>{{ totalprice|intcomma }} تومان</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 d-flex align-items-center" id="replace">
+            <div class="col-sm-6 order-md-2 text-right">
+
+            </div>
+            <form method="post" action="{% url 'ordercreate' %}" class="form-control">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <label>شهر خود را انتخاب کنید: </label>
+                    </div>
+                    <div class="col">
+                        <select name="ordercity" required class="form-select" style="width: fit-content" id="ordercity">
+                            <option value="" selected>---------</option>
+                            {% for city in cities %}
+                                <option value="{{ city.id }}">{{ city.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label>آدرس: </label>
+                        </div>
+                        <textarea name="orderaddress" class="form-control  w-75"></textarea>
+                    </div>
+                    {% for cartitem in cart.cartitem_set.all %}
+                        <input type="hidden" name="{{ cartitem.product.name }}" value="{{ cartitem.id }}">
+                    {% endfor %}
+                </div>
+                <button type="submit" id="orderbtn" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">تکمیل سفارش</button>
+            </form>
+        </div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <ul class="list-group m-5 align-items-center">
+        <h1>انبار ها</h1>
+        {% for inventory in inventory_list %}
+
+
+            <li class="list-group-item city-list w-50">
+                <div class="row">
+                    <div class="col-8"> {{ inventory.city }}</div>
+                    <div class="col">
+                        <a href="{% url 'inventorydelete' inventory.id %}" class="btn btn-danger">حذف</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'inventoyupdate' inventory.id %}" class="btn btn-secondary">ویرایش</a>
+                    </div>
+                </div>
+            </li>
+
+        {% endfor %}
+        <a href="{% url 'inventorycreate' %}" class="btn btn-success mt-2">افزودن انبار</a>
+
+    </ul>
+{% endblock %}

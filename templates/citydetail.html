@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="row clearfix">
+        {% for product in city.inventory.product_set.all %}
+
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img src="{{ product.avatar.url }}" alt="Product" class="img-fluid">
+                        <div class="hover">
+                            <a href="{% url 'productdetail' product.id %}" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-eye"></i></a>
+                             </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="{% url 'productdetail' product.id %}">{{ product.name }} {{ product.Type }}</a></h5>
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">{{ product.price|intcomma }} تومان</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}

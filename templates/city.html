@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <ul class="list-group m-5 align-items-center">
+        {% for city in city_list %}
+
+            {% if city.inventory %}
+                <li class="list-group-item city-list w-50"><a href="{% url 'citydetail' city.id %}" class="link-dark link-underline link-underline-opacity-0 link-underline-opacity-50-hover">{{ city.name }}</a> </li>
+
+            {% endif %}
+
+
+
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

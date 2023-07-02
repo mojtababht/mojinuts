@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block content %}
+<ul class="list-group m-5 align-items-center">
+        {% for order in order_list %}
+
+                <li class="list-group-item city-list w-50"><a href="{% url 'orderupdate' order.id %}" class="link-dark link-underline link-underline-opacity-0 link-underline-opacity-50-hover">{{ order.user.phone_no }} {{ order.city }}</a>  {% if order.is_send %}ارسال شده {% endif %}</li>
+
+
+
+
+
+        {% endfor %}
+    </ul>
+{% endblock %}

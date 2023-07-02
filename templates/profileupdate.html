@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <form method="post" class="login-signup" style="width: 30rem">
+            {% csrf_token %}
+            <label class="mt-2">نام </label>{{ form.first_name }}
+            <label class="mt-2">نام خانوادگی </label>{{ form.last_name }}
+            <button type="submit" class="btn btn-success mt-2">ذخیره</button>
+            <a href="{% url 'profile' customuser.id %}" class="btn btn-danger mt-2">لغو</a>
+
+        </form>
+    </div>
+
+{% endblock %}

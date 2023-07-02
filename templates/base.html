@@ -1,0 +1,147 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/cdede9b824.js' %}"></script>
+
+    <link href="{% static 'css/select2.min.css' %}" rel="stylesheet"/>
+
+    <title>MojiNuts</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'products' %}">خشکبار مجتبی</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'products' %}">صفحه اصلی</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cities' %}">شهر ها</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'aboutus' %}">درباره ما</a>
+                </li>
+
+
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
+                        <input class="form-control me-2" type="search" placeholder="جست و جو کنید" aria-label="Search"
+                               name="search">
+                        <button class="btn btn-outline-success d-flex align-items-center" type="submit"><i
+                                class="fa fa-search"></i></button>
+                    </form>
+                </li>
+            </ul>
+
+
+            <div class="nav-item dropdown navbar-nav mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img src="{{ user.avatar.url }}" class="rounded-circle" style="width:30px;" alt="Avatar">
+                        {{ user.first_name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{% url 'profile' user.id %}">پروفایل</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'cartdetail' user.cart.id %}">
+                                سبد خرید
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" id="logoutLink" style="cursor: pointer">خروج</a></li>
+                    </ul>
+                {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">ورود/ثبت نام</a>
+                {% endif %}
+
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- Navbar -->
+
+<div id="content">
+
+    {% block content %}{% endblock content %}
+</div>
+<footer class="footer mt-auto py-3 bg-light text-center text-lg-start ">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">متن فوتر</h5>
+
+                <p>
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها
+                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و
+                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و
+                    آینده
+                </p>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">متن فوتر</h5>
+
+                <p>
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها
+                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و
+                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و
+                    آینده
+                </p>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-dark" href="https://github.com/mojtababht">mojtababht</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+
+</body>
+
+</html>
